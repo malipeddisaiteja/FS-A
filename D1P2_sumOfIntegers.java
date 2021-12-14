@@ -34,6 +34,11 @@ output = 0
 Explanation -
 Since no numbers print 0 
 */
+
+/*------------------------------------*/
+/*-Method-1: Using Integer.parseInt()-*/
+/*------------------------------------*/
+
 import java.util.*;
 
 class Test{
@@ -66,4 +71,50 @@ class Test{
         int sum = sumOfIntegers(str);
         System.out.println(sum);
     }
+}
+
+/*--------------------------------------------*/
+/*-Method-2: Without using Integer.parseInt()-*/
+/*--------------------------------------------*/
+
+import java.util.*;
+
+public class Main
+{
+    static int getSum(String num,int sum){
+        int l=num.length(),n=0;
+        if(l!=0){
+            for(int i=0;i<l;i++){
+                int power = (int)Math.pow(10,l-i-1);
+                sum += ((num.charAt(i)-'0') * power);
+            }
+        }
+        return sum;
+    }
+    
+    static int sumOfNum(String s){
+        int L=s.length(),sum=0;
+        String num="";
+        for(int i=0;i<L;i++){
+            char c = s.charAt(i);
+            int diff = c-'0';
+            if(diff>=0 && diff<=9){
+                num += c;
+            }
+            else{
+                sum = getSum(num,sum);
+                num="";
+            }
+        }
+        sum = getSum(num,sum);
+        
+        return sum;
+    }
+    
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    String str = sc.next();
+	    int value = sumOfNum(str);
+    	System.out.println("Sum is: "+value);
+	}
 }
